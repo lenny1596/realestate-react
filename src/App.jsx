@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import Projectpage from "./projects/Projectpage";
+import ProjectPage from "./projects/ProjectPage";
 
 function App() {
   return (
     <div className="container">
-      <Projectpage />
+      <ProjectPage />
     </div>
   );
 }

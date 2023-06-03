@@ -1,12 +1,13 @@
 import { Mock_Projects } from "./MockProjects";
+import ProjectList from "./ProjectList";
 
-const Projectpage = () => {
+const ProjectPage = () => {
   return (
     <>
       <h1>Projects</h1>
-      <pre>{JSON.stringify(Mock_Projects, null, " ")}</pre>
+      <ProjectList projects={Mock_Projects} />
     </>
   );
 };
 
-export default Projectpage;
+export default ProjectPage;
