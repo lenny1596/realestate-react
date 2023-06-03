@@ -89,4 +89,48 @@ export const Mock_Projects = [
     budget: 21205,
     isActive: true,
   }),
+  new Project({
+    id: 9,
+    name: "Lesch - Waelchi",
+    description:
+      "Profound mobile project. Rem consequatur laborum explicabo sint odit et illo voluptas expedita.",
+    imageUrl: "/assets/placeimg_500_300_arch1.jpg",
+    contractTypeId: 3,
+    contractSignedOn: "2016-09-23T21:27:25.035Z",
+    budget: 53407,
+    isActive: false,
+  }),
+  new Project({
+    id: 10,
+    name: "Kihn and Sons",
+    description:
+      "Multi-layered grid-enabled local area network. Accusamus numquam neque incidunt perspiciatis consequuntur beatae excepturi iure officiis.",
+    imageUrl: "/assets/placeimg_500_300_arch3.jpg",
+    contractTypeId: 4,
+    contractSignedOn: "2016-04-02T02:40:48.906Z",
+    budget: 62703,
+    isActive: false,
+  }),
+  new Project({
+    id: 11,
+    name: "Kreiger Inc",
+    description:
+      "Profound national matrices. Nam omnis perspiciatis cumque voluptate sequi vel voluptate alias quia.",
+    imageUrl: "/assets/placeimg_500_300_arch11.jpg",
+    contractTypeId: 2,
+    contractSignedOn: "2009-11-20T04:57:43.124Z",
+    budget: 74262,
+    isActive: false,
+  }),
+  new Project({
+    id: 12,
+    name: "Jones, Boyle and Reichel",
+    description:
+      "Cross-platform high-level hierarchy. Ut recusandae sint accusamus nam sunt repellendus nihil soluta ipsam.",
+    imageUrl: "/assets/placeimg_500_300_arch9.jpg",
+    contractTypeId: 1,
+    contractSignedOn: "2014-02-23T12:11:19.381Z",
+    budget: 79475,
+    isActive: true,
+  }),
 ];

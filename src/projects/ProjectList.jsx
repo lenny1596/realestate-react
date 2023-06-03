@@ -1,8 +1,17 @@
 import PropTypes from "prop-types";
 import { Project } from "./Project";
+import ProjectCard from "./ProjectCard";
 
 const ProjectList = ({ projects }) => {
-  return <pre>{JSON.stringify(projects, null, " ")}</pre>;
+  return (
+    <div className="row">
+      {projects.map((project) => (
+        <div key={project.id} class="cols-sm">
+          <ProjectCard project={project} />
+        </div>
+      ))}
+    </div>
+  );
 };
 
 ProjectList.propTypes = {
