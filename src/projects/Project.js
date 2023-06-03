@@ -1,5 +1,7 @@
 export class Project {
+  // An object containing the initial values for the project properties.
   constructor(initializer) {
+    // Initialize default values for all properties
     this.id = undefined;
     this.name = "";
     this.description = "";
@@ -9,6 +11,7 @@ export class Project {
     this.budget = 0;
     this.isActive = false;
 
+    // If an initializer object is provided, use its values to override the default values
     if (!initializer) return;
     if (initializer.id) this.id = initializer.id;
     if (initializer.name) this.name = initializer.name;
@@ -22,6 +25,10 @@ export class Project {
     if (initializer.isActive) this.isActive = initializer.isActive;
   }
 
+  /**
+   * Determines whether the project is new (i.e. has not been saved to the database yet).
+   * @ returns {boolean} - Whether the project is new or not.
+   */
   isNew() {
     return this.id === undefined;
   }
