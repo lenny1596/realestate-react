@@ -7,7 +7,12 @@ const formatDescription = (description) => {
 };
 
 // This component takes a 'project' object as props and returns a card with the project name, description, and budget.
+// The card component also adds a button to edit the project object and calls the 'handleClick' function when the button is clicked.
 const ProjectCard = ({ project }) => {
+  const HandleClick = (event) => {
+    console.log(event);
+  };
+
   return (
     <div className="card">
       <img src={project.imageUrl} alt={project.name} />
@@ -17,6 +22,10 @@ const ProjectCard = ({ project }) => {
         </h5>
         <p>{formatDescription(project.description)}</p>
         <p>Budget : {project.budget.toLocaleString()}</p>
+        <button onClick={() => HandleClick(project)} className="bordered">
+          <span className="icon-edit"></span>
+          Edit
+        </button>
       </section>
     </div>
   );
