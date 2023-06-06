@@ -1,6 +1,13 @@
-const ProjectForm = () => {
+import PropTypes from "prop-types";
+import { Project } from "./Project";
+
+const ProjectForm = ({ onCancel, onSave }) => {
+  const HandleSubmit = (event) => {
+    event.preventDefault();
+    onSave(new Project({ name: "Updated Project" }));
+  };
   return (
-    <form className="input-group vertical">
+    <form onSubmit={HandleSubmit} className="input-group vertical">
       <label htmlFor="name">Project Name</label>
       <input type="text" name="name" placeholder="enter name" />
       <label htmlFor="description">Project Description</label>
@@ -16,12 +23,18 @@ const ProjectForm = () => {
       <div className="input-group">
         <button className="primary bordered medium">Save</button>
         <span />
-        <button type="button" className="bordered medium">
+        <button type="button" onClick={onCancel} className="bordered medium">
           cancel
         </button>
       </div>
     </form>
   );
+};
+
+/** This specifies that the 'onSave' & 'onCancel' props must be functions. **/
+ProjectForm.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
 };
 
 export default ProjectForm;
