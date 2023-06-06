@@ -8,9 +8,9 @@ const formatDescription = (description) => {
 
 // This component takes a 'project' object as props and returns a card with the project name, description, and budget.
 // The card component also adds a button to edit the project object and calls the 'handleClick' function when the button is clicked.
-const ProjectCard = ({ project }) => {
-  const HandleClick = (event) => {
-    console.log(event);
+const ProjectCard = ({ project, onEdit }) => {
+  const HandleClick = (project) => {
+    onEdit(project);
   };
 
   return (
@@ -32,8 +32,10 @@ const ProjectCard = ({ project }) => {
 };
 
 // This specifies that the 'project' prop must be an instance of the 'Project' class interface
+// and that the 'onEdit' prop must be function.
 ProjectCard.propTypes = {
   project: PropTypes.instanceOf(Project).isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default ProjectCard;
