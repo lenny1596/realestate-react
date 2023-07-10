@@ -13,20 +13,24 @@ import ProjectForm from "./ProjectForm";
 const ProjectList = ({ projects, onSave }) => {
   const [editProject, setEditProject] = useState({});
 
-  function handleEdit(projectedited){
+  function handleEdit(projectedited) {
     setEditProject(projectedited);
-  };
+  }
 
-  function handleCancel(){
+  function handleCancel() {
     setEditProject({});
-  };
+  }
 
   return (
     <div className="row">
       {projects.map((project) => (
         <div key={project.id} className="cols-sm">
-          {project.id === editProject.id ? (
-            <ProjectForm onCancel={handleCancel} onSave={onSave} />
+          {project === editProject ? (
+            <ProjectForm
+              project={project}
+              onSave={onSave}
+              onCancel={handleCancel}
+            />
           ) : (
             <ProjectCard project={project} onEdit={handleEdit} />
           )}
