@@ -2,14 +2,14 @@ import PropTypes from "prop-types";
 import { Project } from "./Project";
 
 // Truncates the project description to 60 characters and adds "..." at the end
-const formatDescription = (description) => {
+function formatDescription(description){
   return description.substring(0, 60) + "...";
 };
 
 // This component takes a 'project' object as props and returns a card with the project name, description, and budget.
 // The card component also adds a button to edit the project object and calls the 'handleClick' function when the button is clicked.
 const ProjectCard = ({ project, onEdit }) => {
-  const HandleClick = (project) => {
+  function handleClick(project){
     onEdit(project);
   };
 
@@ -22,7 +22,7 @@ const ProjectCard = ({ project, onEdit }) => {
         </h5>
         <p>{formatDescription(project.description)}</p>
         <p>Budget : {project.budget.toLocaleString()}</p>
-        <button onClick={() => HandleClick(project)} className="bordered">
+        <button onClick={() => handleClick(project)} className="bordered">
           <span className="icon-edit"></span>
           Edit
         </button>

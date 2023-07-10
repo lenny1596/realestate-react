@@ -2,12 +2,13 @@ import PropTypes from "prop-types";
 import { Project } from "./Project";
 
 const ProjectForm = ({ onCancel, onSave }) => {
-  const HandleSubmit = (event) => {
+  function handleFormSubmit(event){
     event.preventDefault();
     onSave(new Project({ name: "Updated Project" }));
   };
+  
   return (
-    <form onSubmit={HandleSubmit} className="input-group vertical">
+    <form onSubmit={handleFormSubmit} className="input-group vertical">
       <label htmlFor="name">Project Name</label>
       <input type="text" name="name" placeholder="enter name" />
       <label htmlFor="description">Project Description</label>
