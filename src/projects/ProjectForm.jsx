@@ -17,7 +17,7 @@ const ProjectForm = ({ project: initialProject, onCancel, onSave }) => {
       [name]: updatedValue,
     };
 
-    let updatedProject;
+    let updatedProject; // your error might have happened bcause you set updatedProject inside setProject instead of outside.
     setProject((prevProject) => {
       updatedProject = new Project({ ...prevProject, ...change });
       return updatedProject;

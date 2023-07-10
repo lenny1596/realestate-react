@@ -25,7 +25,7 @@ const ProjectList = ({ projects, onSave }) => {
     <div className="row">
       {projects.map((project) => (
         <div key={project.id} className="cols-sm">
-          {project === editProject ? (
+          {project === editProject ? ( // your error might have happened bcause you set it to project.id instead of just project.
             <ProjectForm
               project={project}
               onSave={onSave}
