@@ -72,7 +72,8 @@ const ProjectForm = ({ project: initialProject, onCancel, onSave }) => {
   );
 };
 
-/** This specifies that the 'onSave' & 'onCancel' props must be functions. **/
+/** This specifies that the 'onSave' & 'onCancel' props must be functions. 
+ * The project prop must be an instance of Project. **/
 ProjectForm.propTypes = {
   project: PropTypes.instanceOf(Project),
   onCancel: PropTypes.func.isRequired,
