@@ -33,17 +33,17 @@ function parseJSON(response) {
   return response.json();
 }
 
-function delay(ms) {
-  return function (x) {
-    return new Promise((resolve) => setTimeout(() => resolve(x), ms));
-  };
-}
+// function delay(ms) {
+//   return function (x) {
+//     return new Promise((resolve) => setTimeout(() => resolve(x), ms));
+//   };
+// }
 
 const projectAPI = {
   async get(page = 1, limit = 21) {
     try {
       const response = await fetch(`${url}?_page=${page}&_limit=${limit}`); // I removed "&_sort=name" to output data according to id.
-      delay(600);
+      // delay(600);
       checkStatus(response);
       const projects = await parseJSON(response);
       return projects.map((p) => new Project(p));
@@ -51,6 +51,24 @@ const projectAPI = {
       console.log(`client log error: ${error}`);
       throw new Error(
         "There was an error retrieving the projects. Please try again later."
+      );
+    }
+  },
+  async put(project) {
+    try {
+      const response = await fetch(`${url}/${project.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(project),
+      });
+      // delay(600);
+      checkStatus(response);
+      const updatedProject = await parseJSON(response);
+      return updatedProject;
+    } catch (error) {
+      console.log(`client log error: ${error}`);
+      throw new Error(
+        "There was an error updating the project. Please try again."
       );
     }
   },

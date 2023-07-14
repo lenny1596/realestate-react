@@ -1,6 +1,7 @@
 import React, { useState, Fragment, useEffect } from "react";
 import ProjectList from "./ProjectList";
 import { projectAPI } from "./projectAPI";
+import { Project } from "./Project";
 
 /** This component is a page for displaying a list of projects.
  * This function returns a component that displays the page's title and a ProjectList component that takes in Mock_Projects as props.
@@ -35,11 +36,16 @@ const ProjectPage = () => {
     setCurrentPage((currentPage) => currentPage + 1);
   }
 
-  function saveProject(project) {
-    let updatedProjects = projects.map((p) => {
-      return p.id === project.id ? project : p;
-    });
-    setProjects(updatedProjects);
+  async function saveProject(project) {
+    try {
+      const updatedProject = await projectAPI.put(project);
+      let updatedProjects = projects.map((p) => {
+        return p.id === project.id ? new Project(updatedProject) : p;
+      });
+      setProjects(updatedProjects);
+    } catch (e) {
+      setError(e.message);
+    }
   }
 
   return (
