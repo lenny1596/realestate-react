@@ -40,11 +40,9 @@ function delay(ms) {
 }
 
 const projectAPI = {
-  async get(page = 1, limit = 20) {
+  async get(page = 1, limit = 21) {
     try {
-      const response = await fetch(
-        `${url}?_page=${page}&_limit=${limit}&_sort=name`
-      );
+      const response = await fetch(`${url}?_page=${page}&_limit=${limit}`); // I removed "&_sort=name" to output data according to id.
       delay(600);
       checkStatus(response);
       const projects = await parseJSON(response);
