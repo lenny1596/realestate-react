@@ -2,6 +2,7 @@ import React, { useState, Fragment, useEffect } from "react";
 import ProjectList from "./ProjectList";
 import { projectAPI } from "./projectAPI";
 import { Project } from "./Project";
+import ProjectListSkeleton from "./ProjectListSkeleton";
 
 /** This component is a page for displaying a list of projects.
  * This function returns a component that displays the page's title and a ProjectList component that takes in Mock_Projects as props.
@@ -63,7 +64,11 @@ const ProjectPage = () => {
           </div>
         </div>
       )}
+
+      {loading && <ProjectListSkeleton />}
+
       <ProjectList projects={projects} onSave={saveProject} />
+
       {!loading && !error && (
         <div className="row">
           <div className="col-sm-12">
@@ -73,12 +78,6 @@ const ProjectPage = () => {
               </button>
             </div>
           </div>
-        </div>
-      )}
-      {loading && (
-        <div className="center-page">
-          <span className="spinner primary"></span>
-          <p>Loading...</p>
         </div>
       )}
     </Fragment>
