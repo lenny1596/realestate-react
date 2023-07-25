@@ -72,6 +72,19 @@ const projectAPI = {
       );
     }
   },
+  async find(id) {
+    try {
+      const response = await fetch(`${url}/${id}`);
+      checkStatus(response);
+      const responseId = await parseJSON(response);
+      return responseId;
+    } catch (error) {
+      console.log(`client log error: ${error}`);
+      throw new Error(
+        "There was an error retrieving the details. Please try Again."
+      );
+    }
+  },
 };
 
 export { projectAPI };
