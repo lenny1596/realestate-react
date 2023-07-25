@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import ProjectPage from "./projects/ProjectPage";
 import HomePage from "./home/HomePage";
+import ProjectDetail from "./projects/ProjectDetail";
 import {
   BrowserRouter as Router,
   Routes,
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectPage />} />
+          <Route path="/projects/:id" element={<ProjectDetail />} />
         </Routes>
       </div>
     </Router>
