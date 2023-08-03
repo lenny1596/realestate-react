@@ -20,7 +20,7 @@ export const saveProject = createAsyncThunk(
 );
 
 // intialState for reducer func.
-const intialProjectState = {
+const initialProjectState = {
   projects: [],
   loading: false,
   error: null,
@@ -28,10 +28,9 @@ const intialProjectState = {
 };
 
 // init. createSlice for actions to be added to reducer func.
-
-const projectSlice = createSlice({
+export const projectSlice = createSlice({
   name: "projects",
-  initialState: intialProjectState,
+  initialState: initialProjectState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -83,5 +82,3 @@ const projectSlice = createSlice({
       });
   },
 });
-
-export const { actions, reducer } = projectSlice;
