@@ -11,7 +11,7 @@ export const fetchProjects = createAsyncThunk(
   }
 );
 
-export const saveProjects = createAsyncThunk(
+export const saveProject = createAsyncThunk(
   "projects/save",
   async (project) => {
     const data = await projectAPI.put(project);
@@ -19,3 +19,69 @@ export const saveProjects = createAsyncThunk(
   }
 );
 
+// intialState for reducer func.
+const intialProjectState = {
+  projects: [],
+  loading: false,
+  error: null,
+  page: 1,
+};
+
+// init. createSlice for actions to be added to reducer func.
+
+const projectSlice = createSlice({
+  name: "projects",
+  initialState: intialProjectState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      // projects loading request
+      .addCase(fetchProjects.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      // projects loading success
+      .addCase(fetchProjects.fulfilled, (state, action) => {
+        const { projects, page } = action.payload;
+        if (page === 1) {
+          state.projects = projects;
+        } else {
+          state.projects.push(...projects);
+        }
+        state.loading = false;
+        state.page = page;
+        state.error = "";
+      })
+      // projects loading error
+      .addCase(fetchProjects.rejected, (state, action) => {
+        state.error = action.payload.message;
+        state.loading = false;
+      })
+      // new/updating a project request
+      .addCase(saveProject.pending, (state) => {
+        state.loading = true;
+      })
+      // new/updating a project success
+      .addCase(saveProject.fulfilled, (state, action) => {
+        const updatedProject = new Project(action.payload);
+        if (updatedProject.isNew()) {
+          // isNew() is defined in Project.js it checks if the project is new or not.
+          state.projects.push(updatedProject);
+        } else {
+          state.projects = state.projects.map((project) => {
+            return project.id === action.payload.id
+              ? Object.assign(new Project(), project, updatedProject)
+              : project;
+          });
+        }
+        state.loading = false;
+      })
+      // new/updating a project error
+      .addCase(saveProject.rejected, (state, action) => {
+        state.error = action.payload.message;
+        state.loading = false;
+      });
+  },
+});
+
+export const { actions, reducer } = projectSlice;
