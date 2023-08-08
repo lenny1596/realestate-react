@@ -1,7 +1,14 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  fetchProjects,
+  saveProject as saveProjectAction,
+  selectProjects,
+  selectLoading,
+  selectError,
+  selectPage,
+} from "./state/ProjectSlice";
 import ProjectList from "./ProjectList";
-import { projectAPI } from "./projectAPI";
-import { Project } from "./Project";
 import ProjectListSkeleton from "./ProjectListSkeleton";
 
 /** This component is a page for displaying a list of projects.
@@ -9,44 +16,22 @@ import ProjectListSkeleton from "./ProjectListSkeleton";
  * function saveProject is called when the save button is clicked and the project is updated in the Mock_Projects array.
  **/
 const ProjectPage = () => {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(undefined);
-  const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
+  const projects = useSelector(selectProjects);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  const currentPage = useSelector(selectPage);
 
   useEffect(() => {
-    async function loadProjects() {
-      setLoading(true);
-      try {
-        const data = await projectAPI.get(currentPage);
-        if (currentPage === 1) {
-          setProjects(data);
-        } else {
-          setProjects((projects) => [...projects, ...data]);
-        }
-      } catch (e) {
-        setError(e.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadProjects();
-  }, [currentPage]);
+    dispatch(fetchProjects(currentPage));
+  }, [dispatch, currentPage]);
 
   function handleMoreClick() {
-    setCurrentPage((currentPage) => currentPage + 1);
+    dispatch(fetchProjects(currentPage + 1));
   }
 
-  async function saveProject(project) {
-    try {
-      const updatedProject = await projectAPI.put(project);
-      let updatedProjects = projects.map((p) => {
-        return p.id === project.id ? new Project(updatedProject) : p;
-      });
-      setProjects(updatedProjects);
-    } catch (e) {
-      setError(e.message);
-    }
+  function saveProject(project) {
+    dispatch(saveProjectAction(project));
   }
 
   return (
