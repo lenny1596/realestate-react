@@ -1,15 +1,17 @@
 import React from "react";
 import "./App.css";
+import { Provider } from "react-redux";
+import Store from "./store";
+import { Routes, Route, NavLink, useLocation } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ProjectPage from "./projects/ProjectPage";
 import HomePage from "./home/HomePage";
 import ProjectDetail from "./projects/ProjectDetail";
-import { Routes, Route, NavLink, useLocation } from "react-router-dom";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 function App() {
   let location = useLocation();
   return (
-    <>
+    <Provider store={Store}>
       <header className="sticky">
         <span className="logo">
           <img src="/assets/logo-3.svg" alt="logo" width="49" height="99" />
@@ -36,7 +38,7 @@ function App() {
           </CSSTransition>
         </TransitionGroup>
       </div>
-    </>
+    </Provider>
   );
 }
 
