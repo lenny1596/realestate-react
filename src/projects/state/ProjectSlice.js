@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { projectAPI } from "./projectAPI";
-import { Project } from "./Project";
+import { projectAPI } from "../projectAPI";
+import { Project } from "../Project";
 
 // aync thunk action creators
 export const fetchProjects = createAsyncThunk(
@@ -26,6 +26,12 @@ const initialProjectState = {
   error: null,
   page: 1,
 };
+
+// selector for useSelector hook.
+export const selectProjects = (state) => state.projects.projects;
+export const selectLoading = (state) => state.projects.loading;
+export const selectError = (state) => state.projects.error;
+export const selectPage = (state) => state.projects.page;
 
 // init. createSlice for actions to be added to reducer func.
 export const projectSlice = createSlice({
